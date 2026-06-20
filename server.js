@@ -8,13 +8,11 @@ const studyRoutes = require('./routes/study');
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://iridescent-maamoul-ab0d48.netlify.app/"
-];
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: [
+    "http://localhost:5173",
+    "https://iridescent-maamoul-ab0d48.netlify.app"
+  ],
   credentials: true
 }));
 
@@ -32,10 +30,11 @@ const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('MongoDB connection error:', err);
     process.exit(1);
-  });
   });
