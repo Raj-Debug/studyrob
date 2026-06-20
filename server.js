@@ -8,7 +8,13 @@ const studyRoutes = require('./routes/study');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://iridescent-maamoul-ab0d48.netlify.app/"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
